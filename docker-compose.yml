@@ -2,11 +2,13 @@ version: '3'
 services:
   voter-service:
     build: .
-    ports:
-      - 8099:8099
     environment:
       - SPRING_PROFILE=docker-production
       - MONGODB_HOST=mongodb
+  nginx:
+    build: ./nginx
+    ports: 
+      - 8080:80 
   mongodb:
     image: mongo
     
