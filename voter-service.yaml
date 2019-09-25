@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: voter-service
+  namespace: apm
   labels:
     app: voter-service
 spec:
@@ -35,7 +36,7 @@ spec:
         - name: ELASTIC_APM_SERVER_URLS
           value: "ELASTIC_APM_SERVER_ENDPOINT"
         - name: ENABLE_ELASTIC_APM_AGENT
-          value: true
+          value: false
       - name: voter-service-nginx
         image: tomqwu/voter-service-nginx:latest
         imagePullPolicy: Always
@@ -52,7 +53,7 @@ spec:
         - name: UPSTREAM_HOSTNAME
           value: localhost
       - name: mongodb
-        image: mongodb
+        image: mongo
         # resources:
         #   requests:
         #     memory: "128Mi"
@@ -65,6 +66,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: voter-service
+  namespace: apm
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
 spec:
