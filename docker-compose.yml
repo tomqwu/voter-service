@@ -1,0 +1,14 @@
+version: '2.4'
+services:
+  voter-service:
+    build: .
+    environment:
+      - SPRING_PROFILE=docker-production
+      - MONGODB_HOST=mongodb
+      - ELASTIC_APM_SERVER_URLS=${ELASTIC_APM_SERVER_URLS}
+  nginx:
+    build: ./nginx
+    ports: 
+      - 8080:80 
+  mongodb:
+    image: mongo
