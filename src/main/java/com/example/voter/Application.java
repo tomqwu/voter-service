@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import co.elastic.apm.attach.ElasticApmAttacher;
-import org.springframework.boot.SpringApplication;
 
 @SpringBootApplication
 public class Application {
