@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: voter-service
+  name: voter-service-api
   labels:
-    app: voter-service
+    app: voter-service-api
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: voter-service
+      app: voter-service-api
   template:
     metadata:
       labels:
-        app: voter-service
+        app: voter-service-api
     spec:
       containers:
-      - name: voter-service
-        image: tomqwu/voter-service:latest
+      - name: voter-service-api
+        image: tomqwu/voter-service:api
         imagePullPolicy: Always
         ports:
         - containerPort: 8099
-        # resources:
-        #   requests:
-        #     memory: "128Mi"
-        #     cpu: "500m"
-        #   limits:
-        #     memory: "256Mi"
-        #     cpu: "1"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+          limits:
+            memory: "256Mi"
+            cpu: "1"
         env:
         - name: SPRING_PROFILE
           value: docker-production
@@ -34,13 +34,13 @@ spec:
           value: localhost
         - name: ELASTIC_APM_SERVER_URLS
           value: "https://apm-server-quickstart-apm-http:8200/"
-        - name: ENABLE_ELASTIC_APM_AGENT
-          value: "true"
         - name: ELASTIC_APM_VERIFY_SERVER_CERT
           value: "false"
         - name: ELASTIC_APM_SECRET_TOKEN
           value: "c92cq56gnjmkrr44vb566qwh"
-      - name: voter-service-nginx
+        - name: ENABLE_ELASTIC_APM_AGENT
+          value: "true"
+      - name: voter-service-nginx-api
         image: tomqwu/voter-service-nginx:1
         imagePullPolicy: Always
         ports:
@@ -55,7 +55,7 @@ spec:
         env:
         - name: UPSTREAM_HOSTNAME
           value: localhost
-      - name: mongodb
+      - name: mongodb-api
         image: mongo
         resources:
           requests:
@@ -68,12 +68,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: voter-service
+  name: voter-service-api
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
 spec:
   selector:
-    app: voter-service
+    app: voter-service-api
   ports:
     - protocol: TCP
       port: 80
