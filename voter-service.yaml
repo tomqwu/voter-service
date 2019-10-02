@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: voter-service
-  namespace: apm
   labels:
     app: voter-service
 spec:
@@ -34,39 +33,42 @@ spec:
         - name: MONGODB_HOST
           value: localhost
         - name: ELASTIC_APM_SERVER_URLS
-          value: "ELASTIC_APM_SERVER_ENDPOINT"
+          value: "https://apm-server-quickstart-apm-http:8200/"
         - name: ENABLE_ELASTIC_APM_AGENT
+          value: "true"
+        - name: ELASTIC_APM_VERIFY_SERVER_CERT
           value: "false"
+        - name: ELASTIC_APM_SECRET_TOKEN
+          value: "c92cq56gnjmkrr44vb566qwh"
       - name: voter-service-nginx
-        image: tomqwu/voter-service-nginx:latest
+        image: tomqwu/voter-service-nginx:1
         imagePullPolicy: Always
         ports:
         - containerPort: 80
-        # resources:
-        #   requests:
-        #     memory: "128Mi"
-        #     cpu: "250m"
-        #   limits:
-        #     memory: "256Mi"
-        #     cpu: "500m"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
         env:
         - name: UPSTREAM_HOSTNAME
           value: localhost
       - name: mongodb
         image: mongo
-        # resources:
-        #   requests:
-        #     memory: "128Mi"
-        #     cpu: "500m"
-        #   limits:
-        #     memory: "256Mi"
-        #     cpu: "1"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+          limits:
+            memory: "256Mi"
+            cpu: "1"
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: voter-service
-  namespace: apm
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
 spec:
