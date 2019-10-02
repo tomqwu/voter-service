@@ -44,7 +44,7 @@ spec:
           value: "false"
         - name: ELASTIC_APM_SECRET_TOKEN
           value: "c92cq56gnjmkrr44vb566qwh"
-        - name: ENABLE_ELASTIC_APM_AGENT
+        - name: ENABLE_ELASTIC_JAVAAGENT
           value: "true"
       - name: voter-service-nginx-api
         image: tomqwu/voter-service-nginx:1
