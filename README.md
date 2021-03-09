@@ -18,6 +18,21 @@ cd voter-service
 java -jar build/libs/voter-service-0.2.0.jar
 ```
 
+Use Docker build
+```bash
+docker run -d --network=host --rm -p 27017:27017 mongo
+docker run -it -v `pwd`:/home/gradle/project -w /home/gradle/project gradle:6.8.3-jdk8 gradle clean cleanTest build
+```
+
+or
+
+Use docker-compose
+
+```bash
+docker-compose -f docker-compose-build.yml up
+docker-compose -f docker-compose-build.yml rm
+```
+
 ## Getting Started with the API
 The easiest way to get started with the Voter service API, using [HTTPie](https://httpie.org/) from the command line:  
 1. View a list of candidates: `http http://localhost:8099/candidates`  

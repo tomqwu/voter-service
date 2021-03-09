@@ -62,7 +62,7 @@ spec:
         - name: UPSTREAM_HOSTNAME
           value: localhost
       - name: mongodb-api
-        image: mongo
+        image: mongo:3.4
         resources:
           requests:
             memory: "128Mi"

@@ -5,10 +5,13 @@ services:
     environment:
       - SPRING_PROFILE=docker-production
       - MONGODB_HOST=mongodb
-      - ELASTIC_APM_SERVER_URLS=${ELASTIC_APM_SERVER_URLS}
+    depends_on: 
+      - mongodb
   nginx:
     build: ./nginx
     ports: 
-      - 8080:80 
+      - 8080:80
+    depends_on: 
+      - voter-service
   mongodb:
-    image: mongo
+    image: mongo:3.4

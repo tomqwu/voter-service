@@ -1,0 +1,12 @@
+version: '2.4'
+services:
+  gradle:
+    image: gradle:6.8.3-jdk8
+    volumes:
+      - .:/home/gradle/project
+    command: ["gradle", "clean", "cleanTest", "build"]
+    depends_on:
+      - mongodb
+    working_dir: /home/gradle/project
+  mongodb:
+    image: mongo:3.4

@@ -6,4 +6,6 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 COPY init.sh /opt/init.sh
 
+RUN chmod +x /opt/init.sh
+
 ENTRYPOINT [ "/opt/init.sh" ]
