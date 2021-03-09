@@ -18,7 +18,7 @@ cd voter-service
 java -jar build/libs/voter-service-0.2.0.jar
 ```
 
-Use Docker build
+Use Docker to build
 ```bash
 docker run -d --network=host --rm -p 27017:27017 mongo
 docker run -it -v `pwd`:/home/gradle/project -w /home/gradle/project gradle:6.8.3-jdk8 gradle clean cleanTest build
@@ -26,11 +26,17 @@ docker run -it -v `pwd`:/home/gradle/project -w /home/gradle/project gradle:6.8.
 
 or
 
-Use docker-compose
+Use docker-compose to build
 
 ```bash
 docker-compose -f docker-compose-build.yml up
 docker-compose -f docker-compose-build.yml rm
+```
+
+Local Testing
+
+```bash
+docker-compose up --force-recreate --build -d
 ```
 
 ## Getting Started with the API

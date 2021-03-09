@@ -5,13 +5,18 @@ services:
     environment:
       - SPRING_PROFILE=docker-production
       - MONGODB_HOST=mongodb
+    restart: on-failure
     depends_on: 
       - mongodb
   nginx:
     build: ./nginx
     ports: 
       - 8080:80
+    environment:
+      - UPSTREAM_HOSTNAME=voter-service
     depends_on: 
       - voter-service
+    restart: on-failure
   mongodb:
     image: mongo:3.4
+    restart: on-failure
