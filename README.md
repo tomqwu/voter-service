@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/ThoughtWorksInc/voter-service.svg?branch=master)](https://travis-ci.org/ThoughtWorksInc/voter-service)
-
 # Voter Service
+
+[![Build Status](https://travis-ci.org/ThoughtWorksInc/voter-service.svg?branch=master)](https://travis-ci.org/ThoughtWorksInc/voter-service)
 
 ## Introduction
 
@@ -19,6 +19,7 @@ java -jar build/libs/voter-service-0.2.0.jar
 ```
 
 Use Docker to build
+
 ```bash
 docker run -d --network=host --rm -p 27017:27017 mongo
 docker run -it -v `pwd`:/home/gradle/project -w /home/gradle/project gradle:6.8.3-jdk8 gradle clean cleanTest build
@@ -40,7 +41,9 @@ docker-compose up --force-recreate --build -d
 ```
 
 ## Getting Started with the API
+
 The easiest way to get started with the Voter service API, using [HTTPie](https://httpie.org/) from the command line:  
+
 1. View a list of candidates: `http http://localhost:8099/candidates`  
 2. Create sample voter data: `http http://localhost:8099/simulation`  
 3. View sample voter results: `http http://localhost:8099/results`  
@@ -49,20 +52,20 @@ The easiest way to get started with the Voter service API, using [HTTPie](https:
 
 By default, the service runs on `localhost`, port `8099`. By default, the service looks for MongoDB on `localhost`, port `27017`.
 
-Purpose                                                                                                                  | Method  | Endpoint
------------------------------------------------------------------------------------------------------------------------- | :------ | :-----------------------------------------------------
-Create Random Sample Data                                                                                                | GET     | [/simulation](http://localhost:8099/simulation)
-List Candidates                                                                                                          | GET     | [/candidates](http://localhost:8099/candidates)
-Submit Vote                                                                                                              | POST    | [/votes](http://localhost:8099/votes)
-View Voting Results                                                                                                      | GET     | [/results](http://localhost:8099/results)
-View Total Votes                                                                                                         | GET     | [/results/votes](http://localhost:8099/results/votes)
-View Winner(s)                                                                                                           | GET     | [/winners](http://localhost:8099/winners)
-View Winning Vote Count                                                                                                  | GET     | [/winners/votes](http://localhost:8091/winners/votes)
-Service Info                                                                                                             | GET     | [/info](http://localhost:8099/info)
-Service Health                                                                                                           | GET     | [/health](http://localhost:8099/health)
-Service Metrics                                                                                                          | GET     | [/metrics](http://localhost:8099/metrics)
-Other [Spring Actuator](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready) endpoints | GET     | `/actuator`, `/mappings`, `/env`, `/configprops`, etc.
-Other [HATEOAS](https://spring.io/guides/gs/rest-hateoas) endpoints for `/votes`                                         | Various | DELETE, PATCH, PUT, page sort, size, etc.
+| Purpose                                                                                                                  | Method  | Endpoint                                               |
+| ------------------------------------------------------------------------------------------------------------------------ | :------ | :----------------------------------------------------- |
+| Create Random Sample Data                                                                                                | GET     | [/simulation](http://localhost:8099/simulation)        |
+| List Candidates                                                                                                          | GET     | [/candidates](http://localhost:8099/candidates)        |
+| Submit Vote                                                                                                              | POST    | [/votes](http://localhost:8099/votes)                  |
+| View Voting Results                                                                                                      | GET     | [/results](http://localhost:8099/results)              |
+| View Total Votes                                                                                                         | GET     | [/results/votes](http://localhost:8099/results/votes)  |
+| View Winner(s)                                                                                                           | GET     | [/winners](http://localhost:8099/winners)              |
+| View Winning Vote Count                                                                                                  | GET     | [/winners/votes](http://localhost:8091/winners/votes)  |
+| Service Info                                                                                                             | GET     | [/info](http://localhost:8099/info)                    |
+| Service Health                                                                                                           | GET     | [/health](http://localhost:8099/health)                |
+| Service Metrics                                                                                                          | GET     | [/metrics](http://localhost:8099/metrics)              |
+| Other [Spring Actuator](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#production-ready) endpoints | GET     | `/actuator`, `/mappings`, `/env`, `/configprops`, etc. |
+| Other [HATEOAS](https://spring.io/guides/gs/rest-hateoas) endpoints for `/votes`                                         | Various | DELETE, PATCH, PUT, page sort, size, etc.              |
 
 The [HAL Browser](https://github.com/mikekelly/hal-browser) API browser for the `hal+json` media type is installed alongside the service. It can be accessed at `http://localhost:8099/actuator/`.
 
@@ -209,7 +212,6 @@ The project's source code is continuously built and tested on every commit to [G
 ## Spring Profiles
 
 The Voter service includes (3) Spring Boot Profiles, in a multi-profile YAML document: `src/main/resources/application.yml`. The profiles are `default`, `aws-production`, and `docker-production`. You will need to ensure your MongoDB instance is available at that `host` address and port of the profile you choose, or you may override the profile's properties.
-
 
 ```yaml
 server:
