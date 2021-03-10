@@ -1,0 +1,16 @@
+# helm upgrade -i mongodb ./helm-chart/mongodb/ -f ./helm-value/mongodb-test.yaml
+
+image:
+  repository: mongo
+  tag: 3.4
+
+service:
+  type: NodePort
+
+resources:
+  requests:
+    memory: "128Mi"
+    cpu: "500m"
+  limits:
+    memory: "256Mi"
+    cpu: "1"
