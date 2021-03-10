@@ -81,8 +81,8 @@ names-service.log
 
 # Crashlytics plugin (for Android Studio and IntelliJ)
 ### Gradle template
-.gradle
-build/
+**/.gradle
+**/build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
