@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voter-service-api
+  labels:
+    app: voter-service-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: voter-service-api
+  template:
+    metadata:
+      labels:
+        app: voter-service-api
+    spec:
+      containers:
+        - name: voter-service-api
+          image: voter-service_voter-service:latest
+          imagePullPolicy: Never #Always
+          ports:
+            - containerPort: 8099
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "500m"
+            limits:
+              memory: "1024Mi"
+              cpu: "1"
+          env:
+            - name: SPRING_PROFILE
+              value: docker-production
+            - name: MONGODB_HOST
+              value: mongodb # same pod
+        - name: voter-service-nginx-api
+          image: voter-service_nginx:latest
+          imagePullPolicy: Never #Always
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          env:
+            - name: UPSTREAM_HOSTNAME
+              value: localhost # same pod
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: voter-service-api
+spec:
+  selector:
+    app: voter-service-api
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
+

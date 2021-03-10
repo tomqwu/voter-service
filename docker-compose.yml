@@ -1,7 +1,7 @@
 version: '2.4'
 services:
   voter-service:
-    build: .
+    build: ./voter-service
     environment:
       - SPRING_PROFILE=docker-production
       - MONGODB_HOST=mongodb
