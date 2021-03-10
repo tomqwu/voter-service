@@ -31,20 +31,20 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.voter-service.image.repository }}:{{ .Values.voter-service.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.voter-service.image.pullPolicy }}
+          image: "{{ .Values.voterService.image.repository }}:{{ .Values.voterService.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.voterService.image.pullPolicy }}
           ports:
             - name: http
               containerPort: 8099
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
         - name: {{ .Chart.Name }}-nginx

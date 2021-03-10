@@ -1,6 +1,6 @@
 replicaCount: 1
 
-voter-service:
+voterService:
   image:
     repository: voter-service_voter-service
     pullPolicy: Never

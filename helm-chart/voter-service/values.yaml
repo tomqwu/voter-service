@@ -4,11 +4,12 @@
 
 replicaCount: 1
 
-image:
-  repository: voter-service_voter-service
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+voterService:
+  image:
+    repository: voter-service_voter-service
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""
 
 nginx:
   image:
