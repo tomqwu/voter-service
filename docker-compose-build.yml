@@ -8,5 +8,7 @@ services:
     depends_on:
       - mongodb
     working_dir: /home/gradle/project
+    restart: on-failure
   mongodb:
     image: mongo:3.4
+    restart: on-failure

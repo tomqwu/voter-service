@@ -32,20 +32,20 @@ spec:
           value: docker-production
         - name: MONGODB_HOST
           value: localhost
-        - name: ELASTIC_APM_ACTIVE
-          value: "true"
-        - name: ELASTIC_APM_APPLICATION_PACKAGES
-          value: "org.example,org.example"
-        - name: ELASTIC_APM_SERVICE_NAME
-          value: "voter-service-apm-javaagent-test"
-        - name: ELASTIC_APM_SERVER_URLS
-          value: "https://apm-server-quickstart-apm-http:8200/"
-        - name: ELASTIC_APM_VERIFY_SERVER_CERT
-          value: "false"
-        - name: ELASTIC_APM_SECRET_TOKEN
-          value: "c92cq56gnjmkrr44vb566qwh"
-        - name: ENABLE_ELASTIC_JAVAAGENT
-          value: "true"
+        # - name: ELASTIC_APM_ACTIVE
+        #   value: "true"
+        # - name: ELASTIC_APM_APPLICATION_PACKAGES
+        #   value: "org.example,org.example"
+        # - name: ELASTIC_APM_SERVICE_NAME
+        #   value: "voter-service-apm-javaagent-test"
+        # - name: ELASTIC_APM_SERVER_URLS
+        #   value: "https://apm-server-quickstart-apm-http:8200/"
+        # - name: ELASTIC_APM_VERIFY_SERVER_CERT
+        #   value: "false"
+        # - name: ELASTIC_APM_SECRET_TOKEN
+        #   value: "c92cq56gnjmkrr44vb566qwh"
+        # - name: ENABLE_ELASTIC_JAVAAGENT
+        #   value: "false"
       - name: voter-service-nginx-api
         image: tomqwu/voter-service-nginx:1
         imagePullPolicy: Always
@@ -75,8 +75,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: voter-service
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
+  # annotations:
+  #   service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
 spec:
   selector:
     app: voter-service
