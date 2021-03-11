@@ -83,3 +83,45 @@ spec:
 [Reference](https://helm.sh/docs/intro/quickstart/)
 
 ## Getting Started with Voter Service app
+
+Local Build
+
+```bash
+docker-compose -f docker-compose-build.yml up
+docker-compose -f docker-compose-build.yml rm
+```
+
+Local Testing
+
+```bash
+docker-compose up --force-recreate --build -d
+```
+
+### Deploy to Kubernetes
+
+All in one deployment
+
+```bash
+kubectl apply -f k8s/voter-service-api-all-in-one.yaml
+```
+
+Check pod status and logs
+
+```bash
+kubectl get po deploy/voter-service-api -c voter-service-api
+kubectl logs po deploy/voter-service-api -c voter-service-api
+```
+
+Seperate Deployment from DB
+
+```bash
+kubectl apply -f k8s/mongodb.yaml
+kubectl apply -f k8s/voter-service-api-microservice.yaml
+```
+
+### Helm Deployment
+
+```bash
+helm upgrade -i ./helm-chart/mongodb -f ./helm-value/mongodb-test.yaml
+helm upgrade -i ./helm-chart/voter-service -f ./helm-value/voter-service-test.yaml
+```
